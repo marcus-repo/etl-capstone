@@ -1,0 +1,49 @@
+version: "3.7"
+services:
+    postgres:
+        image: postgres:9.6
+        environment:
+            - POSTGRES_USER=airflow
+            - POSTGRES_PASSWORD=airflow
+            - POSTGRES_DB=airflow
+        logging:
+            options:
+                max-size: 10m
+                max-file: "3"
+        ports:
+            - "5432:5432"
+
+    webserver:
+        image: puckel/docker-airflow:1.10.9
+        restart: always
+        depends_on:
+            - postgres
+        environment:
+            - LOAD_EX=n
+            - EXECUTOR=Local
+            - AIRFLOW_CONN_POSTGRES_DEFAULT=postgres://airflow:airflow@postgres:5432/airflow
+            - FERNET_KEY=CM1hnIjt9-4LF84yvCjccecoNALEjwJ66gt2FhGo4FE=
+            - AWS_SHARED_CREDENTIALS_FILE=/usr/local/airflow/.aws/credentials
+            - AIRFLOW__OPERATORS__DEFAULT_RAM=1024
+            - AIRFLOW__WEBSERVER__WORKER_REFRESH_INTERVAL=300
+            - AIRFLOW__WEBSERVER__WEB_SERVER_WORKER_TIMEOUT=300
+        logging:
+            options:
+                max-size: 10m
+                max-file: "3"
+        volumes:
+            - ./dags:/usr/local/airflow/dags
+            - ./plugins:/usr/local/airflow/plugins
+            - ./scripts:/usr/local/airflow/scripts
+            - ./staging:/usr/local/airflow/staging
+            - ./requirements.txt:/requirements.txt
+            - ~/.aws:/usr/local/airflow/.aws/
+        ports:
+            - "8080:8080"
+        command: webserver
+        healthcheck:
+            test:
+                ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]
+            interval: 30s
+            timeout: 30s
+            retries: 3

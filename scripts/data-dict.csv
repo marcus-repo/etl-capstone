@@ -1,0 +1,41 @@
+﻿Table;Field;Description
+i94;i94_id;monotonically increasing id used as a primary key
+i94;cit_country_id;Country Codes (2-digit-ISO-Norm) represent the country of citizenship.
+i94;res_country_id;Country Codes (2-digit-ISO-Norm) represent the country of residence.
+i94;state_id;US-State Codes (2-digit), first address (state) after arrival
+i94;mode_id;Arrival mode Integer see mode table
+i94;purpose_id;Travel purpose Integer see purpose table
+i94;visa_id;Type of Visa, Integer see visa_categories
+i94;arrival_date;date of arrival to the US
+i94;cic_id;Attribute: identifies the underlying immigration record
+i94;gender;Attribute: M=Male, F=Female, U=Unknown
+i94;count;Measure: Count of ariving persons
+i94;duration;Measure: days staying in the US (departure_date - arrival_date)
+i94;age;Age at point in time of the arrival
+i94;year;Year of arrival
+i94;month;Month of arrival
+countries;country_id;Country Codes (2-digit-ISO-Norm)
+countries;country_name;Name of the Country
+countries;continent_name;Name of the Continent the Country belongs to
+us_states;state_id;US-State code (2-digit)
+us_states;state_name;US State Name
+mode;mode_id;Arrival mode Integer
+mode;mode_desc;Arrival mode description: Air, Land, Sea, Not Reported
+purpose;purpose_id;Travel Purpose Integer
+purpose;purpose_desc;Travel Purpose Description: Business, Pleasure, Student, Not Reported
+visa_categories;visa_id;Visa type id Integer
+visa_categories;visa;Visa Type (e. g. E1)
+visa_categories;visa_desc;Description of the Type of Visa (e. g. Spouse of a U. S. Citizen)
+visa_categories;visa_group;Describes a group of visa types (e. g. Immediate Relative & Family Sponsored)
+visa_categories;visa_category;Describes the visa category (e. g. Immigrant vs. Non Immigrant Visa)
+temperature;country_id;Country Codes (2-digit-ISO-Norm)
+temperature;month;month of a year (1, 2, …, 12)
+temperature;temperature_mean;Average temperature of the Last 20 available years
+temperature;temperature_min;Minimum temperature of the Last 20 available years
+temperature;temperature_max;Maximum temperature of the last 20 available years
+data_quality;year;reference year of the data (i94 year of arrival) associated with the data load
+data_quality;month;reference month of the data (i94 month of arrival) associated with the data load
+data_quality;test;has_rows, has_nulls
+data_quality;result;passed or failed
+data_quality;field;tested field if applicable
+data_quality;num_recs;row count, null count of tests
