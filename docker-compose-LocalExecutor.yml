@@ -25,8 +25,8 @@ services:
             - FERNET_KEY=CM1hnIjt9-4LF84yvCjccecoNALEjwJ66gt2FhGo4FE=
             - AWS_SHARED_CREDENTIALS_FILE=/usr/local/airflow/.aws/credentials
             - AIRFLOW__OPERATORS__DEFAULT_RAM=1024
-            - AIRFLOW__WEBSERVER__WORKER_REFRESH_INTERVAL=300
-            - AIRFLOW__WEBSERVER__WEB_SERVER_WORKER_TIMEOUT=300
+            - AIRFLOW__WEBSERVER__WORKER_REFRESH_INTERVAL=600
+            - AIRFLOW__WEBSERVER__WEB_SERVER_WORKER_TIMEOUT=600
         logging:
             options:
                 max-size: 10m
