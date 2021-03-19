@@ -155,7 +155,7 @@ def main():
     # local path ".\staging\"
     filepath = LOCAL_DATA
     year = '2016'
-    month ='12'
+    month ='01'
     
     try:
         # read csv files from path and insert into S3 bucket
