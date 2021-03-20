@@ -147,7 +147,49 @@ def get_i94_data(spark, input_data):
     ])     
     
     # read sas datafile
-    df_spark = spark.read.format('com.github.saurfang.sas.spark').load(input_data, schema=i94_schema)
+    try:
+        df_spark = spark.read.format('com.github.saurfang.sas.spark').load(input_data , schema=i94_schema) # , mode='DROPMALFORMED')
+    except Exception:
+        print("Error Reading the file.")
+    else:
+        # handle schema violation (encountered in june file)
+        print("Alternative Read")
+        df_spark_no_schema = spark.read.format('com.github.saurfang.sas.spark').load(input_data)
+        df_spark_no_schema.createOrReplaceTempView("i94_no_schema")
+        
+        # cast datatypes after read
+        df_spark = \
+            spark.sql("""select
+                             int(cicid) 
+                            ,int(i94yr)
+                            ,int(i94mon)
+                            ,int(i94cit)
+                            ,int(i94res)
+                            ,string(i94port)
+                            ,int(arrdate)
+                            ,int(i94mode)
+                            ,string(i94addr)
+                            ,int(depdate)
+                            ,int(i94bir)
+                            ,int(i94visa)
+                            ,int(count)
+                            ,string(dtadfile)
+                            ,string(visapost)
+                            ,string(occup)
+                            ,string(entdepa)
+                            ,string(entdepd)
+                            ,string(entdepu)
+                            ,string(matflag)
+                            ,int(biryear)
+                            ,string(dtaddto)
+                            ,string(gender)
+                            ,string(insnum)
+                            ,string(airline)
+                            ,double(admnum)
+                            ,string(fltno)
+                            ,string(visatype)
+                        from i94_no_schema
+                    """)
     #print(df_spark.count())
     
     return df_spark
