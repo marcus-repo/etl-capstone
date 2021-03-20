@@ -90,13 +90,13 @@ def get_job_flow_overrides(filename):
 
 default_args = {
     "owner": "marcus",
-    "depends_on_past": True,
+    "depends_on_past": False,
     "wait_for_downstream": True,
     "email_on_retry": False,
     "retries": 0,
     "retry_delay": timedelta(minutes=5),
-    "start_date": datetime(2016, 2, 1),
-    "end_date": datetime(2016, 2, 15)
+    "start_date": datetime(2016, 7, 1),
+    "end_date": datetime(2016, 7, 15)
 }
 
 
@@ -119,7 +119,7 @@ with DAG(
         bucket_name=bucket_name,
         prefix="staging",
         key="",
-        load_sas=True,
+        load_sas=False,
         provide_context=True
         )
 
