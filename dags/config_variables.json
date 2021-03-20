@@ -1,6 +1,5 @@
 {
-	
-	"job_flow_overrides": "./dags/job_flow_overrides.json",
+    "job_flow_overrides": "./dags/job_flow_overrides.json",
     "cluster_name": "I94 spark-cluster",
     "log_uri": "s3://<your bucket>",
     "ec2_key_name": "<your key>",
@@ -10,5 +9,4 @@
     "bucket_name": "<your bucket>",
     "region_name": "<your region>",
     "glue_endpoint_url": "https://glue.<your region>.amazonaws.com"
-
 }
