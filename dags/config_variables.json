@@ -1,0 +1,14 @@
+{
+	
+	"job_flow_overrides": "./dags/job_flow_overrides.json",
+    "cluster_name": "I94 spark-cluster",
+    "log_uri": "s3://<your bucket>",
+    "ec2_key_name": "<your key>",
+    "ec2_subnet_id": "<your subnet>",
+    "job_flow_role": "EMR_EC2_DefaultRole",
+    "service_role": "EMR_DefaultRole",
+    "bucket_name": "<your bucket>",
+    "region_name": "<your region>",
+    "glue_endpoint_url": "https://glue.<your region>.amazonaws.com"
+
+}
